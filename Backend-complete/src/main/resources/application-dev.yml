@@ -1,0 +1,10 @@
+# Local development: PostgreSQL, started with docker compose (data stored in ./data/postgres).
+# Uses the datasource settings from application.yml (localhost:5432, database onncall).
+app:
+  auth:
+    provider: dev
+    otp-enabled: true
+  otp:
+    expose-in-response: true
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,http://localhost:8081}

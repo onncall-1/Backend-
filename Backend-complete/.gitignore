@@ -1,0 +1,17 @@
+# Local secrets / config overrides
+src/main/resources/application-local.yml
+.env
+
+# Build output and runtime data
+target/
+data/
+uploads/
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Firebase service-account key: never commit
+secrets/
