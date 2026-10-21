@@ -1,0 +1,36 @@
+package official.onncallbackend.ProviderService.Repository;
+
+import official.onncallbackend.ProviderService.Enum.ProviderServiceStatus;
+import official.onncallbackend.ProviderService.ProviderService;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ProviderServiceRepository
+        extends JpaRepository<ProviderService, Long> {
+
+    boolean existsByProviderIdAndServiceId(
+            Long providerId,
+            Long serviceId
+    );
+
+    boolean existsByProviderIdAndServiceIdAndStatus(
+            Long providerId,
+            Long serviceId,
+            ProviderServiceStatus status
+    );
+
+    List<ProviderService> findByProviderId(Long providerId);
+
+    List<ProviderService> findByServiceId(Long serviceId);
+
+    List<ProviderService> findByProviderIdAndStatus(
+            Long providerId,
+            ProviderServiceStatus status
+    );
+
+    List<ProviderService> findByServiceIdAndStatus(
+            Long serviceId,
+            ProviderServiceStatus status
+    );
+}
