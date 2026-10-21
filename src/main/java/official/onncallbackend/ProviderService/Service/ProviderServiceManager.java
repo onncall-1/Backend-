@@ -7,11 +7,10 @@ import official.onncallbackend.ProviderService.ProviderService;
 import official.onncallbackend.ProviderService.Repository.ProviderServiceRepository;
 import official.onncallbackend.Service.Repository.ServiceRepository;
 import official.onncallbackend.Service.Service;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@org.springframework.stereotype.Service
 public class ProviderServiceManager {
 
     private final ProviderServiceRepository providerServiceRepository;

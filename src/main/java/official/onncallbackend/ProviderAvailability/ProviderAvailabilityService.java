@@ -1,7 +1,7 @@
 
 package official.onncallbackend.ProviderAvailability;
 
-import official.onncallbackend.Provider.ProviderRepository;
+import official.onncallbackend.Provider.Repository.ProviderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

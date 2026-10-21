@@ -3,11 +3,10 @@ package official.onncallbackend.Service;
 import official.onncallbackend.Service.Enum.ServiceStatus;
 import official.onncallbackend.Service.Enum.ServiceType;
 import official.onncallbackend.Service.Repository.ServiceRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@org.springframework.stereotype.Service
 public class ServiceService {
 
     private final ServiceRepository serviceRepository;

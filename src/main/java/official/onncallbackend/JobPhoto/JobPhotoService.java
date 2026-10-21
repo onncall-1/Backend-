@@ -2,7 +2,7 @@
 package official.onncallbackend.JobPhoto;
 
 import official.onncallbackend.Config.FileStorageService;
-import official.onncallbackend.Job.JobRepository;
+import official.onncallbackend.Job.Repository.JobRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

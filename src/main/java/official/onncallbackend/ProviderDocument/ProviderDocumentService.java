@@ -2,7 +2,7 @@
 package official.onncallbackend.ProviderDocument;
 
 import official.onncallbackend.Config.FileStorageService;
-import official.onncallbackend.Provider.ProviderRepository;
+import official.onncallbackend.Provider.Repository.ProviderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

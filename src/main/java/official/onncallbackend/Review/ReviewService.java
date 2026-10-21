@@ -1,7 +1,7 @@
 
 package official.onncallbackend.Review;
 
-import official.onncallbackend.Job.JobRepository;
+import official.onncallbackend.Job.Repository.JobRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

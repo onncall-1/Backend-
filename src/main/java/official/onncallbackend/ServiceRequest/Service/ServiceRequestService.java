@@ -9,11 +9,10 @@ import official.onncallbackend.Service.Service;
 import official.onncallbackend.ServiceRequest.Enum.ServiceRequestStatus;
 import official.onncallbackend.ServiceRequest.Repository.ServiceRequestRepository;
 import official.onncallbackend.ServiceRequest.ServiceRequest;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@org.springframework.stereotype.Service
 public class ServiceRequestService {
 
     private final ServiceRequestRepository serviceRequestRepository;
