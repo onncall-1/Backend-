@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: onncallbackend
+  profiles:
+    default: dev
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/onncall}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+server:
+  port: ${PORT:8080}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:dev-only-secret-change-me-to-a-long-random-string-32chars}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:10080}
+  otp:
+    ttl-minutes: 5
+    max-attempts: 5
+    # When true, the OTP is returned in the API response (dev/test only).
+    expose-in-response: false
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}
+  upload-dir: ${UPLOAD_DIR:./uploads}
+  auth:
+    # firebase: verify Firebase phone sign-in tokens (production)
+    # dev: accept test tokens shaped like dev-token:+91XXXXXXXXXX (never in prod)
+    provider: ${AUTH_PROVIDER:firebase}
+    # Backend-generated SMS codes. Keep false in production; Firebase sends the codes.
+    otp-enabled: ${OTP_ENABLED:false}
+  admin:
+    phone: ${ADMIN_PHONE:}
+  seed:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
