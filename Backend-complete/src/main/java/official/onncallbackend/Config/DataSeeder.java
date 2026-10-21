@@ -53,6 +53,8 @@ public class DataSeeder implements ApplicationRunner {
             User admin = new User();
             admin.setPhone(phone);
             admin.setRole(UserRole.ADMIN);
+            admin.setName("System Administrator");
+            admin.setEmail("admin@onncall.com");
             userRepository.save(admin);
             log.info("Seeded admin account for {}", phone);
         }

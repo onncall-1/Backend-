@@ -60,12 +60,13 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/otp/**", "/api/auth/login", "/api/auth/register",
                                 "/api/auth/firebase/**").permitAll()
                         .requestMatchers("/actuator/health", "/h2-console/**", "/error").permitAll()
+                        .requestMatchers("/api/users", "/api/users/**").permitAll()
 
                         // Service catalogue: public to read, admin to change
                         .requestMatchers(HttpMethod.GET, "/api/services", "/api/services/**").permitAll()
                         .requestMatchers("/api/services", "/api/services/**").hasRole("ADMIN")
 
-                        .requestMatchers("/api/admin/**", "/api/users/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/clients", "/api/distributors").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,
                                 "/api/clients", "/api/providers", "/api/distributors",

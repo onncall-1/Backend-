@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OnnCallBackendApplication {
 
     public static void main(String[] args) {
+        if ("Asia/Calcutta".equalsIgnoreCase(java.util.TimeZone.getDefault().getID())) {
+            java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("Asia/Kolkata"));
+        }
         SpringApplication.run(OnnCallBackendApplication.class, args);
     }
-
 }
