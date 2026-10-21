@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:onncall-test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+app:
+  auth:
+    provider: dev
+    otp-enabled: true
+  otp:
+    expose-in-response: true
+  upload-dir: target/test-uploads
+  seed:
+    enabled: false
