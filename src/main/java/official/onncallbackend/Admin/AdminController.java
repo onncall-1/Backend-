@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/admin/provider-documents")
 public class AdminController {
 
     private final AdminService adminService;
@@ -16,12 +16,12 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/provider-documents/pending")
+    @GetMapping("/pending")
     public List<ProviderDocument> getPendingDocuments() {
         return adminService.getPendingDocuments();
     }
 
-    @PatchMapping("/provider-documents/{documentId}/review")
+    @PatchMapping("/{documentId}/review")
     public ProviderDocument reviewDocument(
             @PathVariable Long documentId,
             @RequestParam boolean approved,
