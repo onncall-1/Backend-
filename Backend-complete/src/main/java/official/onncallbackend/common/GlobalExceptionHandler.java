@@ -22,10 +22,25 @@ import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import official.onncallbackend.exception.DuplicateEmailException;
+import official.onncallbackend.exception.ResourceNotFoundException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(
+            ResourceNotFoundException ex, HttpServletRequest req) {
+        return build(HttpStatus.NOT_FOUND, ex.getMessage(), req, null);
+    }
+
+    @ExceptionHandler(DuplicateEmailException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateEmail(
+            DuplicateEmailException ex, HttpServletRequest req) {
+        return build(HttpStatus.CONFLICT, ex.getMessage(), req, null);
+    }
 
     @ExceptionHandler(ApiException.class)
     public ResponseEntity<ErrorResponse> handleApi(ApiException ex, HttpServletRequest req) {
@@ -96,7 +111,7 @@ public class GlobalExceptionHandler {
     private ResponseEntity<ErrorResponse> build(
             HttpStatus status, String message, HttpServletRequest req, Map<String, String> fields) {
         ErrorResponse body = new ErrorResponse(
-                status.getReasonPhrase(), message, req.getRequestURI(), Instant.now(), fields);
+                status.value(), status.getReasonPhrase(), message, req.getRequestURI(), Instant.now(), fields);
         return ResponseEntity.status(status).body(body);
     }
 }

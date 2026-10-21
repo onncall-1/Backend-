@@ -100,7 +100,7 @@ class AuthFlowIntegrationTest {
 
     @Test
     void protectedEndpointWithoutTokenReturns401() throws Exception {
-        mvc.perform(get("/api/users"))
+        mvc.perform(get("/api/admin/provider-documents/pending"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.message").value("Authentication required"));
     }
@@ -110,7 +110,7 @@ class AuthFlowIntegrationTest {
         String phone = newPhone();
         String token = registerClient(phone, requestOtp(phone));
 
-        mvc.perform(get("/api/users").header("Authorization", "Bearer " + token))
+        mvc.perform(get("/api/admin/provider-documents/pending").header("Authorization", "Bearer " + token))
                 .andExpect(status().isForbidden());
     }
 

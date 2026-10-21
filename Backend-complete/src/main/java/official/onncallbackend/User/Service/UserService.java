@@ -1,63 +1,58 @@
 package official.onncallbackend.User.Service;
 
-import official.onncallbackend.common.ApiException;
-
-import official.onncallbackend.User.User;
-import official.onncallbackend.User.Repository.UserRepository;
-import org.springframework.stereotype.Service;
+import official.onncallbackend.User.Dto.Request.CreateUserRequest;
+import official.onncallbackend.User.Dto.Request.UpdateUserRequest;
+import official.onncallbackend.User.Dto.Response.UserResponse;
 
 import java.util.List;
 
+/**
+ * Service interface declaring core business operations for User CRUD.
+ * Acts as the boundary between the web/controller layer and the persistence layer.
+ */
+public interface UserService {
 
-@Service
-public class UserService {
+    /**
+     * Creates a new user after verifying that the email is not already registered.
+     *
+     * @param request validated user creation payload
+     * @return created user representation
+     * @throws official.onncallbackend.exception.DuplicateEmailException if the email already exists
+     */
+    UserResponse createUser(CreateUserRequest request);
 
+    /**
+     * Retrieves a user by their unique database identifier.
+     *
+     * @param id primary key identifier
+     * @return user representation
+     * @throws official.onncallbackend.exception.ResourceNotFoundException if no user exists with this ID
+     */
+    UserResponse getUserById(Long id);
 
-    private final UserRepository userRepository;
+    /**
+     * Retrieves all registered users.
+     *
+     * @return list of all users
+     */
+    List<UserResponse> getAllUsers();
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    /**
+     * Updates an existing user's details (name and email).
+     *
+     * @param id primary key identifier
+     * @param request validated user update payload
+     * @return updated user representation
+     * @throws official.onncallbackend.exception.ResourceNotFoundException if user does not exist
+     * @throws official.onncallbackend.exception.DuplicateEmailException if the email is taken by another user
+     */
+    UserResponse updateUser(Long id, UpdateUserRequest request);
 
-    
-    public User createUser(User user) {
-
-        if (userRepository.existsByPhone(user.getPhone())) {
-            throw ApiException.conflict("User already exists with phone: " + user.getPhone());
-        }
-
-        return userRepository.save(user);
-    }
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public User getUserById(Long id) {
-
-        return userRepository.findById(id)
-                .orElseThrow(() ->
-                        ApiException.notFound("User not found with id: " + id));
-    }
-
-    public User updateUser(Long id, User user) {
-
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() ->
-                        ApiException.notFound("User not found with id: " + id));
-
-        existingUser.setPhone(user.getPhone());
-        existingUser.setRole(user.getRole());
-
-        return userRepository.save(existingUser);
-    }
-
-    public void deleteUser(Long id) {
-
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() ->
-                        ApiException.notFound("User not found with id: " + id));
-
-        userRepository.delete(existingUser);
-    }
+    /**
+     * Deletes a user by their unique database identifier.
+     *
+     * @param id primary key identifier
+     * @throws official.onncallbackend.exception.ResourceNotFoundException if user does not exist
+     */
+    void deleteUser(Long id);
 }

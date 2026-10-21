@@ -111,6 +111,9 @@ public class AuthService {
         User user = new User();
         user.setPhone(phone);
         user.setRole(req.role());
+        String userName = req.name() != null && !req.name().isBlank() ? req.name().trim() : "User " + phone;
+        user.setName(userName);
+        user.setEmail(phone.replace("+", "") + "@onncall.local");
         userRepository.save(user);
 
         Long profileId = createProfile(user, req);
